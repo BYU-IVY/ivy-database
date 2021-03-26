@@ -5,7 +5,7 @@ const config = require('../config');
 async function getMultiple(page = 1){
 	const offset = helper.getOffset(page, config.listPerPage);
 	const rows = await db.query(
-		`SELECT QID, QText FROM Question`, 
+		`SELECT QID, QText, ParentQ FROM Question WHERE ParentQ=21`, 
 		[offset, config.listPerPage]
 	);
 	const data = helper.emptyOrRows(rows);

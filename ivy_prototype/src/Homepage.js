@@ -5,7 +5,7 @@ export default class Homepage extends Component {
     render() {
         return (
             <div>
-                <div style={{textAlign: 'center', padding: '160px', backgroundImage: "url(/Images/HomePage/ComponentTMP_0-image5.jpg)", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px'}}>
+                <div style={{textAlign: 'center', padding: '20vh', backgroundImage: "url(/Images/HomePage/ComponentTMP_0-image5.jpg)", rel: "preload", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px', height: '100vh'}}>
                     <h1 style={{color: 'white', fontSize: '50px', marginTop: '100px'}}> Cybersecurity Compliance <br/> Web Application</h1>
                     <h4 style={{color: 'white'}}>
                     Our open-source web application identifies key areas your business needs to employ controls (defensive practices, policies, software, and hardware) 

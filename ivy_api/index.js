@@ -6,6 +6,7 @@ const app = express();
 const port = process.env.PORT || 4000;
 const questionsRouter = require('./routes/getQuestions');
 const followRouter = require('./routes/getFollowup');
+const excelRouter = require('./routes/makeCsv');
 var cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
@@ -23,6 +24,7 @@ app.get('/', (req, res) => {
 
 app.use('/questions', questionsRouter);
 app.use('/follow', followRouter);
+app.use('/excel', excelRouter);
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

@@ -15,16 +15,18 @@ export default class Main extends Component {
 
     state = { activeItem: 'home' }
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    
 
     render() {
         const { activeItem } = this.state
+       
         return (
-            <div>
+            <div style={{backgroundColor: 'black'}}>
                 <Router>
                     <div style={{display: "flex",
                     justifyContent: "center", padding: '10px'}}>
                         <Menu inverted pointing secondary>
-                            <Link to="/home"><Menu.Item
+                            <Link to="/"><Menu.Item
                                 name='Home'
                                 active={activeItem === 'Home'}
                                 onClick={this.handleItemClick}
@@ -49,7 +51,7 @@ export default class Main extends Component {
                         </Menu>
                     </div>
                     <Switch>
-                        <Route path="/home">
+                        <Route exact path="/">
                             <Homepage />
                         </Route>
                         <Route path="/application">

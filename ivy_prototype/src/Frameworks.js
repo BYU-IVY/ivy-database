@@ -5,7 +5,7 @@ export default class Frameworks extends Component {
     render() {
         return (
             <div>
-                <div style={{textAlign: 'center', padding: '160px', backgroundImage: "url(/Images/AppPage/ComponentTMP_0-image2.jpg)", rel: "preload", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px'}}>
+                <div style={{textAlign: 'center', padding: '160px', backgroundImage: "url(/Images/AppPage/ComponentTMP_0-image2.jpg)", rel: "preload", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px', height: '100vh'}}>
                     <h1 style={{color: 'white', fontSize: '50px', marginTop: '100px'}}>Frameworks</h1>
                     <h4 style={{color: 'white'}}>
                     For your convenience, we have provided a simplified overview for each of the cybersecurity frameworks our web application utilizes. A cybersecurity framework is a series of documents defining the best practices an organization follows to manage its cybersecurity risk.  When applied properly, cybersecurity frameworks enable IT security leaders to manage their companies’ cyber risks more intelligently. 

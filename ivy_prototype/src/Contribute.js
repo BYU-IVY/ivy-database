@@ -5,7 +5,7 @@ export default class Contribute extends Component {
     render() {
         return (
             <div>
-                <div style={{textAlign: 'center', padding: '160px', backgroundImage: "url(/Images/ContributePage/ComponentTMP_0-image10.jpg)", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px'}}>
+                <div style={{textAlign: 'center', padding: '160px', backgroundImage: "url(/Images/ContributePage/ComponentTMP_0-image10.jpg)", rel: "preload", backgroundPosition: "center", backgroundSize: "cover", marginTop:'-65px', height: '100vh'}}>
                     <h1 style={{color: 'white', fontSize: '50px', marginTop: '100px'}}> Contribute</h1>
                     <h4 style={{color: 'white'}}>
                     Project IVY is a completely open-source web application. The entire repository for this project is available for cloning and tweaking on GitHub. We need your help to keep this web application running smooth and updated with the latest and most relevant Cybersecurity Frameworks possible.

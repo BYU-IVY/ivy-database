@@ -59,6 +59,9 @@ export default class SurveyQuestions extends Component {
     loadQuestions = () => {
         var question = ""
         var QID = ""
+        this.setState ({
+            currentQuestionText: ""
+        })
         axios.get("/questions", {
             params: {
                 previousQuestionAnswer: this.state.answerToPreviousQuestion
@@ -85,6 +88,21 @@ export default class SurveyQuestions extends Component {
             console.log("no response from server")
             
         })
+    }
+
+    downloadCVE = () => {
+        axios({
+            url: '/excel',
+            method: 'GET',
+            responseType: 'blob', // important
+          }).then((response) => {
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'SecurityPosture.xlsx');
+            document.body.appendChild(link);
+            link.click();
+          });
     }
 
 
@@ -141,6 +159,27 @@ export default class SurveyQuestions extends Component {
                         <Grid.Row style={{marginTop: '5vh'}}>
                             <b style={{color: 'white', fontSize: '40px', lineHeight: '100%'}}>Filevine IVY has detected that the following frameworks are necessary for your business's cybersecurity compliance:</b>
                         </Grid.Row>
+                        
+                        </Grid.Column>
+                    </Grid>
+                    <Grid columns={2} style={{padding: '50px'}}>
+                        <Grid.Column style={{textAlign: 'left'}}>
+                            <Grid.Row>
+                                <b style={{color: 'white', fontSize: '30px'}}> <Icon name='check square' style={{color: '#34FFC8'}} />CIS 20</b>
+                            </Grid.Row>
+                            <Grid.Row style={{marginTop: '20px'}}>
+                                <b style={{color: 'white', fontSize: '30px'}}> <Icon name='check square' style={{color: '#34FFC8'}} />PCI DSS</b>
+                            </Grid.Row>
+                            <Grid.Row style={{marginTop: '20px'}}>
+                                <b style={{color: 'white', fontSize: '30px'}}> <Icon name='check square' style={{color: '#34FFC8'}} />HIPAA</b>
+                            </Grid.Row>
+                        </Grid.Column>
+                    
+                        <Grid.Column>
+                            <p style={{color: 'white'}}>
+                                We've compiled a complete, detailed, and simplified document listing all security controls your company needs to implement.
+                            </p>  
+                            <Button onClick={this.downloadCVE} circular positive size='huge' style={{marginTop: '20px', background: '#373737', width: '160px'}}>Download</Button>
                         </Grid.Column>
                     </Grid>
                 </div>
