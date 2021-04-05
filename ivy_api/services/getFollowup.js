@@ -6,7 +6,7 @@ async function followup(page = 1, id){
 	const offset = helper.getOffset(page, config.listPerPage);
 
 	const followRows = await db.query(
-		`SELECT QID, QText, ParentQ FROM Question WHERE ParentQ=?`, 
+		`SELECT QID, QText, ParentQ, MoreDetail, QSummary, Criticality, CompliantAnswer FROM Question WHERE ParentQ=?`, 
 		[id]
 	);
 
