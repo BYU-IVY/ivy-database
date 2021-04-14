@@ -39,22 +39,20 @@ async function download (req, res) {
 
 	console.log(score);
 	var grade = "";
-	if(score >= .9)
-		grade = "A"
-	if(.9 > score && score >= .8)
-		grade = "B"
-	if(.8 > score && score >= .7)
-		grade = "C"
-	if(.7 > score && score >= .6)
-		grade = "D"
-	if(.6 > score && score >= .5)
-		grade = "F"
-	if(.5 > score)
-		grade = "Critical"
+	if(score >= .8)
+		grade = "A";
+	if(.8 > score && score >= .6)
+		grade = "B";
+	if(.6 > score && score >= .4)
+		grade = "C";
+	if(.4 > score && score >= .2)
+		grade = "D";
+	if(.2 > score)
+		grade = "F";
 	
 	//const query = 'SELECT Name, QID, ControlID, FrameworkID, Description, QTEXT, MoreDetail FROM `Question_Control` JOIN Control ON Control.ConrolID = Question_Control.ControlID JOIN Question ON Question.QID = Question_Control.QuestionID IN (' + qids + ')'
 
-	const query = 'SELECT Name, QID, ControlID, FrameworkID, QTEXT, Description, MoreDetail FROM `Question_Control` INNER JOIN Question ON Question_Control.QuestionID = Question.QID INNER JOIN Control ON Question_Control.ControlID = Control.ConrolID WHERE QID IN (' + qids +')'
+	const query = 'SELECT Name, QID, ControlID, FrameworkID, QTEXT, Description, MoreDetail, Criticality FROM `Question_Control` INNER JOIN Question ON Question_Control.QuestionID = Question.QID INNER JOIN Control ON Question_Control.ControlID = Control.ConrolID WHERE QID IN (' + qids +')'
 
 	console.log(query)
 
@@ -63,8 +61,8 @@ async function download (req, res) {
 	let worksheet = workbook.addWorksheet("Controls");
 
 	/*TITLE*/
-	worksheet.mergeCells('A1', 'D6');
-	worksheet.getCell('C2').value = 'ARMOR SECURITY COMPLIANCE REPORT';
+	worksheet.mergeCells('A1', 'E6');
+	worksheet.getCell('C2').value = 'SECURITY MATTERS ASSESSMENT';
 	worksheet.getRow(1).alignment = {vertical: 'middle', wrapText: true};
 	worksheet.getCell('C2').fill = { type: 'pattern', pattern: 'solid', fgColor:{argb:'44546a'}, bgColor:{argb:'44546a'} };
 	worksheet.getCell('A1').font = {size: 36, name: 'calibri', color: {argb: 'fdfdfd'}, bold: true};
@@ -88,17 +86,22 @@ async function download (req, res) {
 		gradeColor = 'FFA401';
 	if(grade == "F")
 		gradeColor = 'F95D07';
-	if(grade == 'Critical')
-		gradeColor = 'FF0000';
 
 	console.log(gradeColor);
 
-	worksheet.mergeCells('B7', 'D11');
+	worksheet.mergeCells('B7', 'B11');
 	worksheet.getCell('B8').value = grade;
 	worksheet.getCell('B8').font = {size: 36, color: {argb: gradeColor}, bold: true};
 	worksheet.getCell('B8').fill = { type: 'pattern', pattern: 'solid', fgColor:{argb:'BFBFBF'}, bgColor:{argb:'BFBFBF'} };
 
-	worksheet.getRow(11).values = ['Security Control Name', 'Question', 'Control Description', 'Action'];
+
+	worksheet.mergeCells('C7', 'E11');
+	worksheet.getCell('C8').value = 'Based on your answers to the assessment, Security Matters recommends improving in the following areas: ';
+	worksheet.getCell('C8').font = {size: 18, bold: true};
+	worksheet.getCell('C8').fill = { type: 'pattern', pattern: 'solid', fgColor:{argb:'BFBFBF'}, bgColor:{argb:'BFBFBF'} };
+
+
+	worksheet.getRow(11).values = ['Security Control Name', 'Question', 'Control Description', 'Action', 'Criticality (Out of 100 points)'];
 	worksheet.getRow(11).height = 34;
 	worksheet.getRow(11).font = {bold: true}
 
@@ -107,6 +110,7 @@ async function download (req, res) {
 		{ key: "QTEXT", width: 90, height: 30 },
 		{ key: "Description", width: 90, height: 30 },
 		{ key: "MoreDetail", width: 90, height: 30 },
+		{ key: "Criticality", width: 25, height: 30 },
 	];
 
 	worksheet.addRows(controls);
